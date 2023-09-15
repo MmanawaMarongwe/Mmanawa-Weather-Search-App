@@ -6,6 +6,10 @@ function displayJohannesburg(response){
     temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     let descriptionElement = document.querySelector("#description");
     descriptionElement.innerHTML = response.data.condition.description;
+    let humidityElement = document.querySelector("#humidity");
+    humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
+    let windElement = document.querySelector("#wind");
+    windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;
 
 }
 
