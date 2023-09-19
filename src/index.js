@@ -34,6 +34,9 @@ function displayJohannesburg(response){
     humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
     windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;  
     dateElement.innerHTML = formatTime(response.data.time *1000);
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute("src",`${response.data.condition.icon_url}`);
+    iconElement.setAttribute("alt",  response.data.condition.icon);
 }
 
 function search(city){
@@ -45,7 +48,6 @@ function search(city){
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
-  console.log(cityInputElement.value);
   search(cityInputElement.value);
 }
 
