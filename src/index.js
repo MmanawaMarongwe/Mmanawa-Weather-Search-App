@@ -34,10 +34,21 @@ function displayJohannesburg(response){
     humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
     windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;  
     dateElement.innerHTML = formatTime(response.data.time *1000);
-
 }
 
-let apiKey = "e6ba34ft27a3a8ccco506b17217f3b8b";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query={Johannesburg}&key=${apiKey}`;
+function search(city){
+    let apiKey = "e6ba34ft27a3a8ccco506b17217f3b8b";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+    axios.get(apiUrl).then(displayJohannesburg);
+}
 
-axios.get(apiUrl).then(displayJohannesburg);
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  console.log(cityInputElement.value);
+  search(cityInputElement.value);
+}
+
+search("Johannesburg");
+let form = document.querySelector("#search-bar");
+form.addEventListener("submit", handleSubmit);
