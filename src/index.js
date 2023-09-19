@@ -1,15 +1,39 @@
+function formatTime(timestamp){
+
+    let now = new Date(timestamp);
+    let weekDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+  
+     let day = weekDays[now.getDay()];
+     let hour = now.getHours();
+     let minutes = now.getMinutes();
+     if (minutes<0){
+        minutes = `0${minutes}`;
+     }
+     return `Last updated on  ${day} ${hour}:${minutes}`;
+  }
+  
 function displayJohannesburg(response){
-    console.log(response.data.weather); 
     let cityElement = document.querySelector("#city");
-    cityElement.innerHTML = response.data.city;
     let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
     let descriptionElement = document.querySelector("#description");
-    descriptionElement.innerHTML = response.data.condition.description;
     let humidityElement = document.querySelector("#humidity");
-    humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
     let windElement = document.querySelector("#wind");
-    windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;
+    let dateElement = document.querySelector("#date");
+
+    cityElement.innerHTML = response.data.city;
+    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+    descriptionElement.innerHTML = response.data.condition.description;
+    humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
+    windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;  
+    dateElement.innerHTML = formatTime(response.data.time *1000);
 
 }
 

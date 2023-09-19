@@ -64,4 +64,5 @@ li{
 
 .humidity-icon, .wind-icon{
     font-size: small;
+    color: rgb(33, 33, 33);
 }
