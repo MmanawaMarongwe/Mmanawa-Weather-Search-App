@@ -28,8 +28,10 @@ function displayJohannesburg(response){
     let windElement = document.querySelector("#wind");
     let dateElement = document.querySelector("#date");
 
+    celciusTemp = response.data.temperature.current
+
     cityElement.innerHTML = response.data.city;
-    temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+    temperatureElement.innerHTML = Math.round(celciusTemp);
     descriptionElement.innerHTML = response.data.condition.description;
     humidityElement.innerHTML = ` Humidity: ${response.data.temperature.humidity} %`;
     windElement.innerHTML = ` Wind: ${response.data.wind.speed} km/h`;  
@@ -51,6 +53,32 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
+function displayFahrenheit(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemp = (celciusTemp  * 9/5) + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+function displayCelcius(event){
+  event.preventDefault();
+  celciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celciusTemp);
+}
+
+let celciusTemp = null
+
 search("Johannesburg");
+
 let form = document.querySelector("#search-bar");
 form.addEventListener("submit", handleSubmit);
+
+let celciusLink = document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", displayCelcius)
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheit)
